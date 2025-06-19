@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - homolog
+      - development
 
 jobs:
   quality-checks:
