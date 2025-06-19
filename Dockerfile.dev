@@ -1,0 +1,23 @@
+# Use an official Node.js runtime as the base image
+FROM node:20-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json first to leverage Docker caching
+COPY package*.json ./
+
+# Install dependencies (including dev dependencies)
+RUN npm install
+
+# Copy development environment file
+COPY .env.development .env
+
+# Expose the application's port
+EXPOSE 3000
+
+# Set environment for development
+ENV NODE_ENV=development
+
+# Command to start the development server with hot reload
+CMD ["npm", "run", "dev"] 
