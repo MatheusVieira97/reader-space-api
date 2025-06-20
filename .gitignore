@@ -13,3 +13,6 @@
 
 # Test coverage
 /coverage
+
+# SQLite database files
+/data

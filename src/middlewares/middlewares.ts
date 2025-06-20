@@ -1,11 +1,12 @@
-// middlewares.ts
 import { RequestHandler } from 'express';
 
-export const middleware: RequestHandler = (req, res, next) => {
+import { getAllPosts } from '../config/queries/posts.js';
+
+export const middleware: RequestHandler = async (req, res) => {
   try {
-    res.send('Hello World!');
-    console.log('Response sent');
-  } catch (error) {
-    next(error as Error);
+    const posts = await getAllPosts();
+    console.log('Posts retrieved:', posts);
+  } catch {
+    res.status(500).json({ error: 'Failed to retrieve posts' });
   }
 };

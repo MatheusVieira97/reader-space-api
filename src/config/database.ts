@@ -1,0 +1,29 @@
+import sqlite3 from 'sqlite3';
+
+sqlite3.verbose();
+
+const db = new sqlite3.Database('./data/posts.db');
+
+db.serialize(() => {
+  db.run(
+    `
+    CREATE TABLE IF NOT EXISTS posts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
+      author TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `,
+    (err) => {
+      if (err) {
+        console.error('Error creating posts table:', err.message);
+      } else {
+        console.log('Posts table created successfully');
+      }
+    }
+  );
+});
+
+export default db;
