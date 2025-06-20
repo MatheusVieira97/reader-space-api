@@ -1,14 +1,15 @@
 import express, { Application } from 'express';
 
 import { seedPosts } from './config/seed.js';
-import { middleware } from './middlewares/middlewares.js';
+import apiRoutes from './routes/index.js';
 
 const app: Application = express();
 const port: number = parseInt(process.env.PORT ?? '9001', 10);
 
-app.get('/', middleware);
+app.use(express.json());
 
-// Seed the database with sample posts
+app.use('/api', apiRoutes);
+
 seedPosts()
   .then(() => {
     console.log('Database seeding completed');
