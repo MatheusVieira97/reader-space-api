@@ -13,6 +13,9 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
+# Create data directory for SQLite database
+RUN mkdir -p /app/data
+
 # Compile TypeScript to JavaScript
 RUN npm run build
 

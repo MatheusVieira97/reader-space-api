@@ -13,6 +13,9 @@ RUN npm install
 # Copy development environment file
 COPY .env.development .env
 
+# Create data directory for SQLite database
+RUN mkdir -p /app/data
+
 # Expose the application's port
 EXPOSE 3000
 
