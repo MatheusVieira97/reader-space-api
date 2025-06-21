@@ -1,4 +1,5 @@
 import { ArticlesRepository, IArticlesRepository } from '../repositories/articles.repository.js';
+import { IArticle } from '../types/article.js';
 
 export class ArticlesService {
   private articlesRepository: IArticlesRepository;
@@ -13,6 +14,15 @@ export class ArticlesService {
       return articles;
     } catch {
       throw new Error('Failed to retrieve articles');
+    }
+  }
+
+  async getArticleById(id: number): Promise<IArticle> {
+    try {
+      const article = await this.articlesRepository.getArticleById(id);
+      return article;
+    } catch {
+      throw new Error('Failed to retrieve article');
     }
   }
 }
