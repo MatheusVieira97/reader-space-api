@@ -11,4 +11,9 @@ router.get('/', async (req, res) => {
   await articlesController.getAllArticles(req, res);
 });
 
+// GET /api/articles/:id
+router.get('/:id', async (req, res) => {
+  await articlesController.getArticleById(req, res);
+});
+
 export default router;
