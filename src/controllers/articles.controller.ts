@@ -30,4 +30,29 @@ export class ArticlesController {
       });
     }
   }
+
+  async getArticleById(req: Request, res: Response) {
+    try {
+      const id: number = parseInt(req.params.id);
+
+      if (isNaN(id)) {
+        res.status(400).json({
+          data: [],
+          message: 'Invalid article ID',
+        });
+        return;
+      }
+
+      const article = await this.articlesService.getArticleById(id);
+      res.json({
+        data: article,
+        message: 'Article retrieved successfully',
+      });
+    } catch {
+      res.status(500).json({
+        data: [],
+        message: 'Failed to retrieve article',
+      });
+    }
+  }
 }
