@@ -1,4 +1,4 @@
-export const samplePosts = [
+export const sampleArticles = [
   {
     author: 'John Doe',
     content:
