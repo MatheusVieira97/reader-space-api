@@ -1,40 +1,40 @@
 import db from './database.js';
-import { samplePosts } from './sampleData.js';
+import { sampleArticles } from './sampleData.js';
 
-export const seedPosts = (): Promise<void> => {
+export const seedArticles = (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const insertPost = (post: (typeof samplePosts)[0]): Promise<void> => {
-      return new Promise((resolvePost, rejectPost) => {
+    const insertArticle = (article: (typeof sampleArticles)[0]): Promise<void> => {
+      return new Promise((resolveArticle, rejectArticle) => {
         db.run(
-          'INSERT INTO posts (title, content, author) VALUES (?, ?, ?)',
-          [post.title, post.content, post.author],
+          'INSERT INTO articles (title, content, author) VALUES (?, ?, ?)',
+          [article.title, article.content, article.author],
           function (err) {
             if (err) {
-              console.error('Error inserting post:', err.message);
-              rejectPost(err);
+              console.error('Error inserting article:', err.message);
+              rejectArticle(err);
             } else {
-              console.log(`Post "${post.title}" inserted with ID: ${String(this.lastID)}`);
-              resolvePost();
+              console.log(`Article "${article.title}" inserted with ID: ${String(this.lastID)}`);
+              resolveArticle();
             }
           }
         );
       });
     };
 
-    db.get('SELECT COUNT(*) as count FROM posts', (err, row: undefined | { count: number }) => {
+    db.get('SELECT COUNT(*) as count FROM articles', (err, row: undefined | { count: number }) => {
       if (err) {
-        console.error('Error checking posts count:', err.message);
+        console.error('Error checking articles count:', err.message);
         reject(err);
         return;
       }
 
       if (row && row.count > 0) {
-        console.log('Posts already exist, skipping seed');
+        console.log('Articles already exist, skipping seed');
         resolve();
         return;
       }
 
-      Promise.all(samplePosts.map(insertPost))
+      Promise.all(sampleArticles.map(insertArticle))
         .then(() => {
           console.log('Seed completed successfully');
           resolve();
@@ -44,4 +44,4 @@ export const seedPosts = (): Promise<void> => {
   });
 };
 
-export default seedPosts;
+export default seedArticles;
