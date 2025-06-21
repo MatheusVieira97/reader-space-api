@@ -1,0 +1,18 @@
+import { ArticlesRepository, IArticlesRepository } from '../repositories/articles.repository.js';
+
+export class ArticlesService {
+  private articlesRepository: IArticlesRepository;
+
+  constructor(articlesRepository?: IArticlesRepository) {
+    this.articlesRepository = articlesRepository ?? new ArticlesRepository();
+  }
+
+  async getAllArticles(limit: number, page: number) {
+    try {
+      const articles = await this.articlesRepository.getAllArticles(limit, page);
+      return articles;
+    } catch {
+      throw new Error('Failed to retrieve articles');
+    }
+  }
+}
