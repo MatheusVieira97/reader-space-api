@@ -3,6 +3,7 @@ import { IArticle, IPaginatedArticleResponse } from '../types/article.js';
 
 export interface IArticlesRepository {
   getAllArticles(limit: number, page: number): Promise<IPaginatedArticleResponse>;
+  getArticleById(id: number): Promise<IArticle>;
 }
 
 export class ArticlesRepository implements IArticlesRepository {
@@ -27,6 +28,15 @@ export class ArticlesRepository implements IArticlesRepository {
             });
           }
         });
+      });
+    });
+  }
+
+  async getArticleById(id: number): Promise<IArticle> {
+    return new Promise((resolve, reject) => {
+      db.get('SELECT * FROM articles WHERE id = ?', [id], (err, row) => {
+        if (err) reject(err);
+        resolve(row as IArticle);
       });
     });
   }
