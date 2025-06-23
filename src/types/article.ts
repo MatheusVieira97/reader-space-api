@@ -3,6 +3,9 @@ export interface IArticle {
   content: string;
   created_at: string;
   id: number;
+  image_url?: string;
+  published_at?: string;
+  tag?: string;
   title: string;
   updated_at: string;
 }

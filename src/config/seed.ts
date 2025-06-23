@@ -6,8 +6,15 @@ export const seedArticles = (): Promise<void> => {
     const insertArticle = (article: (typeof sampleArticles)[0]): Promise<void> => {
       return new Promise((resolveArticle, rejectArticle) => {
         db.run(
-          'INSERT INTO articles (title, content, author) VALUES (?, ?, ?)',
-          [article.title, article.content, article.author],
+          'INSERT INTO articles (title, content, author, tag, image_url, published_at) VALUES (?, ?, ?, ?, ?, ?)',
+          [
+            article.title,
+            article.content,
+            article.author,
+            article.tag,
+            article.image_url,
+            article.published_at,
+          ],
           function (err) {
             if (err) {
               console.error('Error inserting article:', err.message);
