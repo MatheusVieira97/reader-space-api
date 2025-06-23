@@ -12,6 +12,9 @@ db.serialize(() => {
       title TEXT NOT NULL,
       content TEXT NOT NULL,
       author TEXT NOT NULL,
+      tag TEXT,
+      image_url TEXT,
+      published_at DATETIME,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
