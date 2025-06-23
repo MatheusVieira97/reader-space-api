@@ -4,6 +4,18 @@ import { IArticlesRepository } from '../../repositories/articles.repository';
 import { ArticlesService } from '../../services/articles';
 import { IArticle, IPaginatedArticleResponse } from '../../types/article';
 
+// Mock the database module to prevent actual database connections during tests
+vi.mock('../../config/database', () => ({
+  default: {
+    all: vi.fn(),
+    get: vi.fn(),
+    run: vi.fn(),
+    serialize: vi.fn((callback: () => void) => {
+      callback();
+    }),
+  },
+}));
+
 vi.mock('../../repositories/articles.repository');
 
 describe('ArticlesService', () => {
