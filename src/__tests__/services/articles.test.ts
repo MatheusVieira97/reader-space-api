@@ -77,7 +77,7 @@ describe('ArticlesService', () => {
 
     const result = await articlesService.getAllArticles(10, 1);
 
-    expect(mockRepository.getAllArticles).toHaveBeenCalledWith(10, 1);
+    expect(mockRepository.getAllArticles).toHaveBeenCalledWith(10, 1, undefined);
     expect(result).toEqual(mockResponse);
     expect(result.data).toHaveLength(2);
     expect(result.page).toBe(1);
