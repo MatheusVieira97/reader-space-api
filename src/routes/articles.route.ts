@@ -7,6 +7,7 @@ const router = Router();
 const articlesController = new ArticlesController();
 
 // GET /api/articles - Cache por 2 minutos
+// Query params: limit (number), page (number), tag (string)
 router.get('/', cacheMiddleware({ ttl: 2 * 60 * 1000 }), async (req, res) => {
   await articlesController.getAllArticles(req, res);
 });
