@@ -13,8 +13,9 @@ export class ArticlesController {
     try {
       const limit: number = req.query.limit ? parseInt(req.query.limit as string) : 10;
       const page: number = req.query.page ? parseInt(req.query.page as string) : 1;
+      const tag: string | undefined = req.query.tag as string | undefined;
 
-      const articles = await this.articlesService.getAllArticles(limit, page);
+      const articles = await this.articlesService.getAllArticles(limit, page, tag);
 
       res.json({
         data: articles.data,
@@ -22,6 +23,7 @@ export class ArticlesController {
         page: articles.page,
         totalItems: articles.totalItems,
         totalPages: articles.totalPages,
+        ...(tag && { filteredBy: { tag } }),
       });
     } catch {
       res.status(500).json({
