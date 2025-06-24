@@ -8,9 +8,9 @@ export class ArticlesService {
     this.articlesRepository = articlesRepository ?? new ArticlesRepository();
   }
 
-  async getAllArticles(limit: number, page: number) {
+  async getAllArticles(limit: number, page: number, tag?: string) {
     try {
-      const articles = await this.articlesRepository.getAllArticles(limit, page);
+      const articles = await this.articlesRepository.getAllArticles(limit, page, tag);
       return articles;
     } catch {
       throw new Error('Failed to retrieve articles');
