@@ -9,7 +9,7 @@ export class ArticlesController {
     this.articlesService = new ArticlesService();
   }
 
-  async getAllArticles(req: Request, res: Response) {
+  async getAllArticles(req: Request, res: Response): Promise<void> {
     try {
       const limit: number = req.query.limit ? parseInt(req.query.limit as string) : 10;
       const page: number = req.query.page ? parseInt(req.query.page as string) : 1;
@@ -31,7 +31,7 @@ export class ArticlesController {
     }
   }
 
-  async getArticleById(req: Request, res: Response) {
+  async getArticleById(req: Request, res: Response): Promise<void> {
     try {
       const id: number = parseInt(req.params.id);
 
