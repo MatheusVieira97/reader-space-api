@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import express, { Application } from 'express';
 
 import corsMiddleware from './config/cors.js';
