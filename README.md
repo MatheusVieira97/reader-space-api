@@ -1,107 +1,92 @@
 # Reader Space API
 
-A modern, high-performance REST API built with Node.js, TypeScript, and Express for the Reader Space application. This API provides article management capabilities with caching, pagination, and comprehensive error handling.
+Uma API REST moderna e de alta performance construída com Node.js, TypeScript e Express para a aplicação Reader Space. Esta API fornece capacidades de gerenciamento de artigos com cache, paginação e tratamento abrangente de erros.
 
-## 🚀 Features
+## 🚀 Funcionalidades
 
 - **TypeScript**
 - **Express.js**
 - **SQLite**
-- **Caching**
-- **Pagination**
+- **Cache**
+- **Paginação**
 - **CORS**
-- **Testing**
+- **Testes**
 - **Docker**
-- **Code Quality**
+- **Qualidade de Código**
 - **Hot Reload**
 
-## 📋 Prerequisites
+## 📋 Pré-requisitos
 
-- **Node.js**: 18.x or higher
-- **npm**: 8.x or higher
-- **Docker**: 20.x or higher (optional, for containerized development)
+- **Node.js**: 18.x ou superior
+- **npm**: 8.x ou superior
+- **Docker**: 20.x ou superior (opcional, para desenvolvimento containerizado)
 
-## 🛠️ Installation
+## 🛠️ Instalação
 
-1. **Clone the repository**
+1. **Clone o repositório**
 
    ```bash
    git clone git@github.com:MatheusVieira97/reader-space-api.git
    cd reader-space-api
    ```
 
-2. **Install dependencies**
+2. **Instale as dependências**
+
+```bash
+npm install
+```
+
+3. **Configure as variáveis de ambiente**
 
    ```bash
-   npm install
-   ```
+   # Crie o arquivo de ambiente .env.development
 
-3. **Set up environment variables**
-
-   ```bash
-   # Create environment file .env
-
-   # Edit with your configuration with:
+   # Edite com sua configuração:
    NODE_ENV="development"
    ```
 
-## 🚀 Quick Start
+## 🐳 Desenvolvimento com Docker
 
-### Local Development Without Docker (Not Recommended)
+### Usando Docker Compose (Recomendado)
 
-Start the development server with hot reload:
-
-```bash
-npm run dev
-```
-
-The API will be available at `http://localhost:3000`
-
-### Production Build
-
-Build and run the production server:
-
-```bash
-npm run build
-npm start
-```
-
-## 🐳 Docker Development
-
-### Using Docker Compose (Recommended)
-
-Run the development environment:
+Execute o ambiente de desenvolvimento:
 
 ```bash
 docker compose build api-dev
 docker compose up api-dev -d
 ```
 
-Run the production environment:
-
-```bash
-docker compose up api-prod
-```
-
-Run both environments simultaneously:
-
-```bash
-docker compose up
-```
-
-**Service URLs:**
-
-- Development API: `http://localhost:3000`
-
-Stop all services:
+Pare todos os serviços:
 
 ```bash
 docker-compose down
 ```
 
-## 📚 API Documentation
+## Desenvolvimento Local Sem Docker
+Inicie o servidor de desenvolvimento com hot reload:
 
-### Base URL
+```bash
+npm run dev
+```
+
+A API estará disponível em `http://localhost:3000`
+
+### Build de Produção
+
+Compile e execute o servidor de produção:
+
+```bash
+npm run build
+npm start
+```
+
+**URLs dos Serviços:**
+
+- API de Desenvolvimento: `http://localhost:3000`
+
+## 📚 Documentação da API
+
+### URL Base
 
 ```
 http://localhost:3000/api
@@ -109,30 +94,30 @@ http://localhost:3000/api
 
 ### Endpoints
 
-#### Get All Articles
+#### Obter Todos os Artigos
 
 ```http
 GET /api/articles
 ```
 
-**Cache:** 2 minutes
-**Query Parameters:**
+**Cache:** 2 minutos
+**Parâmetros de Query:**
 
-- `limit` (number, optional): Number of articles per page (default: 10)
-- `page` (number, optional): Page number (default: 1)
-- `tag` (string, optional): Filter articles by tag
+- `limit` (number, opcional): Número de artigos por página (padrão: 10)
+- `page` (number, opcional): Número da página (padrão: 1)
+- `tag` (string, opcional): Filtrar artigos por tag
 
-**Response:**
+**Resposta:**
 
 ```json
 {
   "data": [
     {
       "id": 1,
-      "title": "Article Title",
-      "content": "Article content...",
-      "author": "Author Name",
-      "tag": "technology",
+      "title": "Título do Artigo",
+      "content": "Conteúdo do artigo...",
+      "author": "Nome do Autor",
+      "tag": "tecnologia",
       "image_url": "https://example.com/image.jpg",
       "created_at": "2024-01-01T00:00:00.000Z",
       "updated_at": "2024-01-01T00:00:00.000Z",
@@ -145,40 +130,40 @@ GET /api/articles
 }
 ```
 
-#### Get Article by ID
+#### Obter Artigo por ID
 
 ```http
 GET /api/articles/:id
 ```
 
-**Cache:** 5 minutes
-**Response:**
+**Cache:** 5 minutos
+**Resposta:**
 
 ```json
 {
   "data": {
     "id": 1,
-    "title": "Article Title",
-    "content": "Article content...",
-    "author": "Author Name",
-    "tag": "technology",
+    "title": "Título do Artigo",
+    "content": "Conteúdo do artigo...",
+    "author": "Nome do Autor",
+    "tag": "tecnologia",
     "image_url": "https://example.com/image.jpg",
     "created_at": "2024-01-01T00:00:00.000Z",
     "updated_at": "2024-01-01T00:00:00.000Z",
     "published_at": "2024-01-01T00:00:00.000Z"
   },
-  "message": "Article retrieved successfully"
+  "message": "Artigo recuperado com sucesso"
 }
 ```
 
-### Error Responses
+### Respostas de Erro
 
 **400 Bad Request:**
 
 ```json
 {
-  "error": "Invalid request parameters",
-  "message": "Detailed error message"
+  "error": "Parâmetros de requisição inválidos",
+  "message": "Mensagem detalhada do erro"
 }
 ```
 
@@ -186,8 +171,8 @@ GET /api/articles/:id
 
 ```json
 {
-  "error": "Article not found",
-  "message": "Article with ID 123 does not exist"
+  "error": "Artigo não encontrado",
+  "message": "Artigo com ID 123 não existe"
 }
 ```
 
@@ -195,68 +180,68 @@ GET /api/articles/:id
 
 ```json
 {
-  "error": "Internal server error",
-  "message": "An unexpected error occurred"
+  "error": "Erro interno do servidor",
+  "message": "Ocorreu um erro inesperado"
 }
 ```
 
-## 🧪 Testing
+## 🧪 Testes
 
-### Run Tests
+### Executar Testes
 
 ```bash
-# Run tests in watch mode
+# Executar testes em modo watch
 npm test
 
-# Run tests once
+# Executar testes uma vez
 npm run test:run
 
-# Run tests with UI
+# Executar testes com UI
 npm run test:ui
 
-# Generate coverage report
+# Gerar relatório de cobertura
 npm run coverage
 ```
 
-## 🔧 Development Scripts
+## 🔧 Scripts de Desenvolvimento
 
-| Script                 | Description                              |
+| Script                 | Descrição                                |
 | ---------------------- | ---------------------------------------- |
-| `npm run dev`          | Start development server with hot reload |
-| `npm run build`        | Compile TypeScript to JavaScript         |
-| `npm start`            | Start production server                  |
-| `npm run type-check`   | Run TypeScript type checking             |
-| `npm run lint`         | Run ESLint                               |
-| `npm run lint:fix`     | Fix ESLint issues automatically          |
-| `npm run format`       | Format code with Prettier                |
-| `npm run format:check` | Check code formatting                    |
-| `npm test`             | Run tests with Vitest                    |
-| `npm run test:run`     | Run tests once                           |
-| `npm run test:ui`      | Run tests with UI                        |
-| `npm run coverage`     | Generate test coverage report            |
+| `npm run dev`          | Iniciar servidor de desenvolvimento com hot reload |
+| `npm run build`        | Compilar TypeScript para JavaScript      |
+| `npm start`            | Iniciar servidor de produção             |
+| `npm run type-check`   | Executar verificação de tipos TypeScript |
+| `npm run lint`         | Executar ESLint                          |
+| `npm run lint:fix`     | Corrigir problemas do ESLint automaticamente |
+| `npm run format`       | Formatar código com Prettier             |
+| `npm run format:check` | Verificar formatação do código           |
+| `npm test`             | Executar testes com Vitest               |
+| `npm run test:run`     | Executar testes uma vez                  |
+| `npm run test:ui`      | Executar testes com UI                   |
+| `npm run coverage`     | Gerar relatório de cobertura de testes   |
 
-### IDE Setup
+### Configuração do IDE
 
-**VS Code Extensions:**
+**Extensões do VS Code:**
 
 - ESLint
 - Prettier
 - TypeScript Importer
 
-### Commit Convention
+### Convenção de Commits
 
-This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+Este projeto segue [Conventional Commits](https://www.conventionalcommits.org/):
 
-- `feat:` New features
-- `fix:` Bug fixes
-- `docs:` Documentation changes
-- `style:` Code style changes
-- `refactor:` Code refactoring
-- `test:` Test changes
-- `chore:` Build process or auxiliary tool changes
+- `feat:` Novas funcionalidades
+- `fix:` Correções de bugs
+- `docs:` Mudanças na documentação
+- `style:` Mudanças no estilo do código
+- `refactor:` Refatoração de código
+- `test:` Mudanças nos testes
+- `chore:` Mudanças no processo de build ou ferramentas auxiliares
 
-## 👨‍💻 Author
+## 👨‍💻 Autor
 
 **Matheus Vieira**
 
-**Happy Coding! 🚀**
+**Feliz Programação! 🚀**
