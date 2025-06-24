@@ -1,5 +1,6 @@
 {
   "branches": ["main"],
+  "repositoryUrl": "https://github.com/MatheusVieira97/reader-space-api",
   "plugins": [
     ["@semantic-release/commit-analyzer"],
     ["@semantic-release/release-notes-generator"],
