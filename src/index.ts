@@ -1,11 +1,15 @@
+import 'dotenv/config';
 import express, { Application } from 'express';
 
+import corsMiddleware from './config/cors.js';
 import { seedArticles } from './config/seed.js';
 import apiRoutes from './routes/index.js';
 
 const app: Application = express();
 const port: number = parseInt(process.env.PORT ?? '3000');
 
+// Apply CORS middleware
+app.use(corsMiddleware);
 app.use(express.json());
 
 app.use('/api', apiRoutes);
